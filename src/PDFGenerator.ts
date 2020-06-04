@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 import { Helper } from "./Helper";
 import { GeneratorFunction } from "./types/GeneratorTypes";
+import { getTemplate } from "./templates/pdf-template";
 
 export class PDFGenerator {
   /**
@@ -10,8 +11,7 @@ export class PDFGenerator {
    */
   static getPDF: GeneratorFunction = async (event) => {
     try {
-      const html: string =
-        '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"></head><body><h1>Hello World</h1><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam consequatur voluptate, aut libero natus aliquid dignissimos! Voluptatem repellat quibusdam doloribus impedit quisquam labore molestias, saepe illum, assumenda eum voluptate praesentium.</div></body></html>';
+      const html = getTemplate({ name: "Keshav" });
       const options = {
         format: "A4",
         printBackground: true,

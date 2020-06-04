@@ -5,10 +5,14 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  prune:
+    automatic: true
+    number: 5
 
 plugins:
   - serverless-webpack
   - serverless-offline
+  - serverless-prune-plugin
 
 provider:
   name: aws
@@ -19,7 +23,7 @@ provider:
   stage: ${opt:stage, 'dev'}
   apiGateway:
     binaryMediaTypes:
-      - "application/pdf"
+      - "*/*"
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
 
