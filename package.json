@@ -30,5 +30,5 @@
     "webpack-node-externals": "^1.7.2"
   },
   "author": "Keshav Kumaresan <keshavkumaresan1002@gmail.com>",
-  "license": "MIT"
+  "license": "Unlicense"
 }
