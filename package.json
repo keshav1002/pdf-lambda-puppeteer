@@ -2,7 +2,7 @@
   "name": "pdf-lambda-puppeteer",
   "version": "1.0.0",
   "description": "Service that generates PDF based on a template",
-  "main": "handler.js",
+  "main": "handler.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "sls offline --stage local",
@@ -11,7 +11,6 @@
   "dependencies": {
     "chrome-aws-lambda": "^3.1.1",
     "handlebars": "^4.7.6",
-    "lodash": "^4.17.15",
     "puppeteer-core": "^3.3.0",
     "source-map-support": "^0.5.10"
   },

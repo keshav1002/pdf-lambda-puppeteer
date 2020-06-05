@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import * as chromium from "chrome-aws-lambda";
 
 import { GetPDFBuffer } from "./types/HelperTypes";

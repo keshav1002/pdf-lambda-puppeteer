@@ -1,4 +1,3 @@
-import * as _ from "lodash";
 import { Helper } from "./Helper";
 import { GeneratorFunction } from "./types/GeneratorTypes";
 import { getTemplate } from "./templates/pdf-template";
