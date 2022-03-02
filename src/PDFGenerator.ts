@@ -1,6 +1,7 @@
 import { Helper } from "./Helper";
 import { GeneratorFunction } from "./types/GeneratorTypes";
 import { getTemplate } from "./templates/pdf-template";
+import { getTemplate2 } from "./templates/pdf-template-new";
 
 export class PDFGenerator {
   /**
@@ -10,7 +11,44 @@ export class PDFGenerator {
    */
   static getPDF: GeneratorFunction = async (event) => {
     try {
-      const html = getTemplate({ name: "Keshav" });
+
+      console.log('event.body');
+      console.log(event.body);
+
+      console.log('typeof event.body');
+      console.log(typeof event.body);
+
+      console.log('event.body == null');
+      console.log(event.body == null);
+
+      console.log('event.body != null');
+      console.log(event.body != null);
+
+      if ('body' in event && event.body != null){
+        var content = event.body;
+        var buff = new Buffer.from(content, 'base64');
+        content = buff.toString('ascii');
+        content = JSON.parse(content);
+        if ('html' in content){
+          content = content.html;
+          var html = getTemplate2({ html: content });
+        }
+        else if ('url' in content){
+
+        }
+        console.log('or this??');
+      }
+      else {
+        console.log('this happen?');
+        var html = getTemplate({ name: "Keshav" });
+      }
+
+      console.log('content');
+      console.log(content);
+
+      console.log('html');
+      console.log(html);
+
       const options = {
         format: "A4",
         printBackground: true,
@@ -18,6 +56,8 @@ export class PDFGenerator {
       };
 
       const pdf = await Helper.getPDFBuffer(html, options);
+
+      console.log(pdf);
 
       return {
         headers: {

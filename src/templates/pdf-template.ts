@@ -45,6 +45,9 @@ const html: string = `
 </html>
 `;
 
+console.log('html');
+console.log(html);
+
 export const getTemplate: any = (context: any) => {
   return handlebars.compile(html)(context);
 };
