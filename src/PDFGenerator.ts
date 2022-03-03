@@ -12,6 +12,11 @@ export class PDFGenerator {
   static getPDF: GeneratorFunction = async (event) => {
     try {
 
+      var url = '';
+
+      console.log('event.event.queryStringParameters.url');
+      console.log(event.queryStringParameters.url);
+
       console.log('event.body');
       console.log(event.body);
 
@@ -33,14 +38,18 @@ export class PDFGenerator {
           content = content.html;
           var html = getTemplate2({ html: content });
         }
-        else if ('url' in content){
-
-        }
         console.log('or this??');
       }
       else {
         console.log('this happen?');
-        var html = getTemplate({ name: "Keshav" });
+        if ('url' in event.queryStringParameters){
+          url = event.queryStringParameters.url;
+          console.log('url');
+          console.log(url);
+        }
+        else {
+          var html = getTemplate({ name: "Keshav" });
+        }
       }
 
       console.log('content');
@@ -55,13 +64,14 @@ export class PDFGenerator {
         margin: { top: "1in", right: "1in", bottom: "1in", left: "1in" },
       };
 
-      const pdf = await Helper.getPDFBuffer(html, options);
+      const pdf = await Helper.getPDFBuffer(html, options, url);
 
       console.log(pdf);
 
       return {
         headers: {
           "Content-type": "application/pdf",
+          "Content-Disposition": "attachment; filename=restfile.pdf"
         },
         statusCode: 200,
         body: pdf.toString("base64"),
