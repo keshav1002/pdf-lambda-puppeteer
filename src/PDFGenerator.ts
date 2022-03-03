@@ -11,17 +11,16 @@ export class PDFGenerator {
     try {
 
       var url = event.queryStringParameters.url;
-      var html;
 
       const options = {
         // format: "A4",
         width: 1920,
         height: 1080,
         printBackground: true,
-        margin: { top: "1in", right: "1in", bottom: "1in", left: "1in" },
+        margin: { top: "0in", right: "0in", bottom: "0in", left: "0in" },
       };
 
-      const pdf = await Helper.getPDFBuffer(html, options, url);
+      const pdf = await Helper.getPDFBuffer(url, options);
 
       return {
         headers: {
