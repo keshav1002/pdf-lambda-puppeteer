@@ -32,11 +32,4 @@ functions:
     events:
       - http:
           method: get
-          path: /getPDF
-  postPDF:
-    handler: handler.getPDF
-    memorySize: 1024 # Setting a higher RAM size to facilitate PDF generation
-    events:
-      - http:
-          method: post
-          path: /getPDF
+          path: /pdf

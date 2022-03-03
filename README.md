@@ -10,3 +10,10 @@ To get started,
 4. Configure the `profile` attribute in the `serverless.yml` according to your profile or remove it if not needed.
 5. You can start the project offline by running `npm start` or you can deploy and test it by running `npm run deploy-prod`.
 6. Enjoy generating PDF documents :)
+
+
+
+
+
+
+https://y3t13lz4q1.execute-api.us-west-2.amazonaws.com/prod/pdf?url=www.floristone.com/tree/certificate/index.html
