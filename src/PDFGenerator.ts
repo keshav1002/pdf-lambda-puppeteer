@@ -59,7 +59,9 @@ export class PDFGenerator {
       console.log(html);
 
       const options = {
-        format: "A4",
+        // format: "A4",
+        width: 1920,
+        height: 1080,
         printBackground: true,
         margin: { top: "1in", right: "1in", bottom: "1in", left: "1in" },
       };
@@ -70,8 +72,8 @@ export class PDFGenerator {
 
       return {
         headers: {
-          "Content-type": "application/pdf",
-          "Content-Disposition": "attachment; filename=restfile.pdf"
+          "Content-type": "application/pdf"
+          // , "Content-Disposition": "attachment; filename=restfile.pdf"
         },
         statusCode: 200,
         body: pdf.toString("base64"),
