@@ -48,7 +48,16 @@ export class PDFGenerator {
   static renderTreeCertificate: GeneratorFunction = async (event) => {
     try {
 
-      const html = getTreeCertificateTemplate({ name: "Bob" });
+      console.log(event.body);
+
+      var data = event.body;
+      var buff = new Buffer.from(data, 'base64');
+      data = buff.toString('ascii');
+      data = JSON.parse(data);
+
+      console.log(data);
+
+      const html = getTreeCertificateTemplate({ recipientName: data.recipientName, senderName: data.senderName });
 
       const options = {
         format: "A4",

@@ -17,12 +17,16 @@ const html: string = `
     }
   </style>
   <body>
-    <h1>Tree CERT for {{name}}</h1>
+    <h1>Tree Certificate for {{recipientName}}</h1>
     <div>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam consequatur
       voluptate, aut libero natus aliquid dignissimos! Voluptatem repellat
       quibusdam doloribus impedit quisquam labore molestias, saepe illum,
       assumenda eum voluptate praesentium.
+    </div>
+    <p>&nbsp;</p>
+    <div>
+      Sent by {{senderName}}
     </div>
   </body>
 </html>
