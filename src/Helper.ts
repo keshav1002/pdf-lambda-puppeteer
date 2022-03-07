@@ -3,7 +3,7 @@ import * as chromium from "chrome-aws-lambda";
 import { GetPDFBuffer } from "./types/HelperTypes";
 
 export class Helper {
-  static getPDFBuffer: GetPDFBuffer = async (html: string, options: any) => {
+  static getPdfBuffer: GetPDFBuffer = async (url: string, html: string, options: any) => {
     let browser = null;
     try {
       const executablePath = process.env.IS_OFFLINE
@@ -15,12 +15,33 @@ export class Helper {
       });
 
       const page = await browser.newPage();
-      const loaded = page.waitForNavigation({
-        waitUntil: "load",
-      });
 
-      await page.setContent(html);
-      await loaded;
+      console.log('url');
+      console.log(url);
+      console.log('html');
+      console.log(html);
+      console.log('options');
+      console.log(options);
+
+      if (url != null){
+        console.log('url code happnin');
+        url = 'https://' + url;
+        await page.goto(url);
+      }
+      else if (html != null){
+        console.log('html code happnin');
+        const loaded = page.waitForNavigation({
+          waitUntil: "load",
+        });
+        await page.setContent(html);
+        await loaded;
+      }
+      else {
+        console.log('the fuuck?');
+      }
+
+      console.log('page');
+      console.log(page);
 
       return await page.pdf(options);
     } catch (error) {

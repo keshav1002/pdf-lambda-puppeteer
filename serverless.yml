@@ -1,5 +1,4 @@
-service:
-  name: pdf-lambda-puppeteer
+service: pdf-lambda-puppeteer
 
 custom:
   webpack:
@@ -17,7 +16,6 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  profile: personal # Modify or remove accordingly
   region: ${opt:region, 'us-west-2'}
   endpointType: REGIONAL
   stage: ${opt:stage, 'dev'}
@@ -28,10 +26,17 @@ provider:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
 
 functions:
-  getPDF:
-    handler: handler.getPDF
+  getPdf:
+    handler: handler.getPdf
     memorySize: 1024 # Setting a higher RAM size to facilitate PDF generation
     events:
       - http:
           method: get
-          path: /getPDF
+          path: /pdf
+  renderTreeCertificate:
+    handler: handler.renderTreeCertificate
+    memorySize: 1024 # Setting a higher RAM size to facilitate PDF generation
+    events:
+      - http:
+          method: post
+          path: /treeCertificate
