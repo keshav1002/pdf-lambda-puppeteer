@@ -48,14 +48,10 @@ export class PDFGenerator {
   static renderTreeCertificate: GeneratorFunction = async (event) => {
     try {
 
-      console.log(event.body);
-
       var data = event.body;
       var buff = new Buffer.from(data, 'base64');
       data = buff.toString('ascii');
       data = JSON.parse(data);
-
-      console.log(data);
 
       //format date
       if (data.dateOfCertificate != null && data.dateOfCertificate.length > 0){
