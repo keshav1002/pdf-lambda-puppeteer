@@ -16,13 +16,6 @@ export class Helper {
 
       const page = await browser.newPage();
 
-      console.log('url');
-      console.log(url);
-      console.log('html');
-      console.log(html);
-      console.log('options');
-      console.log(options);
-
       if (url != null){
         console.log('url code happnin');
         url = 'https://' + url;
@@ -36,12 +29,6 @@ export class Helper {
         await page.setContent(html);
         await loaded;
       }
-      else {
-        console.log('the fuuck?');
-      }
-
-      console.log('page');
-      console.log(page);
 
       return await page.pdf(options);
     } catch (error) {

@@ -57,7 +57,20 @@ export class PDFGenerator {
 
       console.log(data);
 
-      const html = getTreeCertificateTemplate({ recipientName: data.recipientName, senderName: data.senderName });
+      //format date
+      if (data.dateOfCertificate != null && data.dateOfCertificate.length > 0){
+        var dateOfCertificate = new Date(data.dateOfCertificate);
+      }
+      else {
+        var dateOfCertificate = new Date();
+      }
+      dateOfCertificate = dateOfCertificate.toLocaleString('en-US', {
+        day: 'numeric',
+        year: 'numeric',
+        month: 'long',
+      });
+
+      const html = getTreeCertificateTemplate({ recipientName: data.recipientName, senderName: data.senderName, dateOfCertificate: dateOfCertificate, numberOfTrees: data.numberOfTrees });
 
       const options = {
         format: "A4",

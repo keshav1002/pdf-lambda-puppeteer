@@ -19,6 +19,22 @@
 					</td>
 				</tr>
 				<tr>
+					<td>
+						Number Of Trees
+					</td>
+					<td>
+						<input type="text" id="form-number-of-trees" name="form-number-of-trees" value="5 Trees Planted in Alberta">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Date
+					</td>
+					<td>
+						<input type="text" id="form-date-of-certificate" name="form-date-of-certificate" value="2021-12-25">
+					</td>
+				</tr>
+				<tr>
 					<td colspan="1">
 						<input type="submit" value="Create Tree Certificate">
 					</td>
@@ -33,6 +49,8 @@
 			<cfset createCertificatePayload = StructNew()>
 			<cfset createCertificatePayload['recipientName'] = form["form-recipient-name"]>
 			<cfset createCertificatePayload['senderName'] = form["form-sender-name"]>
+			<cfset createCertificatePayload['numberOfTrees'] = form["form-number-of-trees"]>
+			<cfset createCertificatePayload['dateOfCertificate'] = form["form-date-of-certificate"]>
 
 			<cfhttp url="https://y3t13lz4q1.execute-api.us-west-2.amazonaws.com/prod/treeCertificate" method="post" getAsBinary="yes">
 				<cfhttpparam type="body" value="#serializejson(createCertificatePayload)#">

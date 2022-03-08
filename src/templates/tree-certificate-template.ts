@@ -17,23 +17,21 @@ const html: string = `
     }
   </style>
   <body>
-    <h1>Tree Certificate for {{recipientName}}</h1>
-    <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam consequatur
-      voluptate, aut libero natus aliquid dignissimos! Voluptatem repellat
-      quibusdam doloribus impedit quisquam labore molestias, saepe illum,
-      assumenda eum voluptate praesentium.
+    <h1>Memorial Tree Certificate</h1>
+    <h3>In loving memory of</h3>
+    <h2>{{recipientName}}</h2>
+    <div style="background-color: green; height: 32px; width: 80%;">
+      {{numberOfTrees}}
     </div>
     <p>&nbsp;</p>
     <div>
-      Sent by {{senderName}}
+      <h3>Courtesy of:</h3>
+      <h2>{{senderName}}</h2>
     </div>
+    <p>{{dateOfCertificate}}</p>
   </body>
 </html>
 `;
-
-console.log('html');
-console.log(html);
 
 export const getTreeCertificateTemplate: any = (context: any) => {
   return handlebars.compile(html)(context);
