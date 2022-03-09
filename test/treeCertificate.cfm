@@ -55,11 +55,11 @@
 			<cfhttp url="https://y3t13lz4q1.execute-api.us-west-2.amazonaws.com/prod/treeCertificate" method="post" getAsBinary="yes">
 				<cfhttpparam type="body" value="#serializejson(createCertificatePayload)#">
 			</cfhttp>
-			<cffile action="write" file="C:/inetpub/wwwroot/FHW-Solutions/abc.pdf" output="#cfhttp.FileContent#">
+			<cffile action="write" file="C:/inetpub/wwwroot/FHW-Solutions/TreeCertificate.pdf" output="#cfhttp.FileContent#">
 
 			<!--- <cfdump var="#cfhttp#"> --->
 
-			<iframe src="https://dev.fhwsolutions.com/abc.pdf" title="" width="1000" height="500"></iframe>
+			<iframe src="https://dev.fhwsolutions.com/TreeCertificate.pdf" title="" width="1375" height="1063"></iframe>
 
 		</cfif>
 

@@ -21,7 +21,7 @@ const html: string = `
           margin: auto;
       }
       .banner{
-          background-image: url('./images/banner.png');
+          background-image: url('https://cdn.floristone.com/tree-certificate/banner.jpg');
           background-repeat: no-repeat;
           background-size: 100% 100%;
           background-position: center;
@@ -31,7 +31,7 @@ const html: string = `
           z-index: 999;
       }
       .memory{
-          background-image: url('./images/linen.png');
+          background-image: url('https://cdn.floristone.com/tree-certificate/linen.png');
           background-repeat:repeat;
           background-position: center;
           padding-top: 50px;
@@ -77,7 +77,7 @@ const html: string = `
           top: 2px;
       }
       .rectangle{
-          background-image: url('./images/rectangle.png');
+          background-image: url('https://cdn.floristone.com/tree-certificate/rectangle.png');
           background-repeat: no-repeat;
           padding-top: 8px;
           padding-bottom: 5px;
@@ -176,8 +176,8 @@ const html: string = `
        <div class="divider">
     </div>
     <div class="inner">
-     <img src="./images/tree-Icon.png" alt="">  <h2>{{recipientName}}</h2>
-     <img src="./images/tree-Icon.png" alt="">
+     <img src="https://cdn.floristone.com/tree-certificate/tree-Icon.png" alt="">  <h2>{{recipientName}}</h2>
+     <img src="https://cdn.floristone.com/tree-certificate/tree-Icon.png" alt="">
     </div><!--inner-->
 
     <div class="divider">
@@ -207,7 +207,7 @@ const html: string = `
           </div>
 
           <div class="float-three">
-              <img src="images/logo.png" alt="">
+              <img src="https://cdn.floristone.com/tree-certificate/logo.png" alt="">
           </div>
           <div style="clear: both;"></div>
 
@@ -227,6 +227,8 @@ const html: string = `
 </body>
 </html>
 `;
+
+console.log(html);
 
 export const getTreeCertificateTemplate: any = (context: any) => {
   return handlebars.compile(html)(context);
