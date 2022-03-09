@@ -53,7 +53,7 @@ export class PDFGenerator {
       data = buff.toString('ascii');
       data = JSON.parse(data);
 
-      //format date
+      // format date
       if (data.dateOfCertificate != null && data.dateOfCertificate.length > 0){
         var dateOfCertificate = new Date(data.dateOfCertificate);
       }
@@ -66,7 +66,22 @@ export class PDFGenerator {
         month: 'long',
       });
 
-      const html = getTreeCertificateTemplate({ recipientName: data.recipientName, senderName: data.senderName, dateOfCertificate: dateOfCertificate, numberOfTrees: data.numberOfTrees });
+      // partner
+      switch(data.partner){
+        case "AMERICAN_FORESTS":
+          var partnerString = 'Planted in parthnership with American Forests';
+          var partnerLogo = 'https://cdn.floristone.com/tree-certificate/logo.png';
+          break;
+      }
+
+      const html = getTreeCertificateTemplate({
+        recipientName: data.recipientName,
+        senderName: data.senderName,
+        dateOfCertificate: dateOfCertificate,
+        numberOfTrees: data.numberOfTrees,
+        partnerString: partnerString,
+        partnerLogo: partnerLogo
+      });
 
       const options = {
         format: "Letter",

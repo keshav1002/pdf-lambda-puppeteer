@@ -203,11 +203,11 @@ const html: string = `
           </div>
 
           <div class="float-two">
-           <h2>Planted in parthnership with American Forests</h2>
+           <h2>{{partnerString}}</h2>
           </div>
 
           <div class="float-three">
-              <img src="https://cdn.floristone.com/tree-certificate/logo.png" alt="">
+              <img src="{{partnerLogo}}" alt="">
           </div>
           <div style="clear: both;"></div>
 
