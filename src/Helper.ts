@@ -22,7 +22,7 @@ export class Helper {
       }
       else if (html != null){
         const loaded = page.waitForNavigation({
-          waitUntil: "load",
+          waitUntil: "networkidle2",
         });
         await page.setContent(html);
         await loaded;

@@ -77,23 +77,6 @@ export class PDFGenerator {
 
       const pdf = await Helper.getPdfBuffer(null, html, options);
 
-      function formatBytes(bytes: number, decimals = 2) {
-          if (bytes === 0) return '0 Bytes'
-
-          const k = 1024
-          const dm = decimals < 0 ? 0 : decimals
-          const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-
-          const i = Math.floor(Math.log(bytes) / Math.log(k))
-
-          return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
-      }
-
-      console.log('oh haiii');
-      const responseSize = Buffer.byteLength(JSON.stringify(pdf.toString("base64")), 'utf-8');
-      console.log('FINAL Response' + responseSize);
-      console.log(formatBytes(responseSize));
-
       return {
         headers: {
           "Content-type": "application/pdf"
