@@ -85,7 +85,7 @@ const html: string = `
           margin: auto;
           width: 573px;
           background-size: 100% 100%;
-          margin-top: 5px;
+          margin-top: 25px;
       }
       .rectangle h4{
           color: #fff;
@@ -139,8 +139,10 @@ const html: string = `
       .float-three{
           width: 20%;
           float: left;
+          text-align: left;
       }
       .float-three img{
+          margin-top: 7px;
           height: 50px;
       }
       .down h2{
@@ -151,16 +153,19 @@ const html: string = `
       .footer h4{
           color: #EBE3DD;
           text-align: center;
+          font-size: 24px;
+          font-weight: lighter;
           margin-top: 10px;
           margin-bottom: 10px;
       }
       .footer{
-          background: linear-gradient(#705339,#77573C );
+          background: linear-gradient(#705339,#99714D, #99714D );
           padding-bottom: 5px;
           padding-top: 5px;
           font-size: 18px;
           font-weight: 400;
       }
+
     </style>
 </head>
 <body>
@@ -220,7 +225,7 @@ const html: string = `
 
     <div class="footer">
       <div class="container">
-        <h4>Your trees improve air and water quality, resrtore natural habitats, and cool earth</h4>
+        <h4>Your trees improve air and water quality, restore natural habitats, and cool earth</h4>
       </div><!--container-->
     </div><!--footer-->
 

@@ -70,7 +70,7 @@ export class PDFGenerator {
       // partner
       switch(data.partner){
         case "AMERICAN_FORESTS":
-          partnerString = 'Planted in parthnership with American Forests';
+          partnerString = 'Planted in partnership with American Forests';
           partnerLogo = 'https://cdn.floristone.com/tree-certificate/logo.png';
           break;
       }

@@ -22,7 +22,7 @@ body{
     background-repeat:repeat;
     background-position: center;
     padding-top: 50px;
-    padding-bottom:25px;
+    padding-bottom:35px;
     width: 100%;
     min-height: 450px;
     margin-top: -58px;    
@@ -32,7 +32,7 @@ body{
     font-size: 50px;
     font-weight: 300;
     margin-bottom: 0;
-    margin-top: 0;
+    margin-top: 10px;
 }
 .memory h3{
     color: #030403;
@@ -55,7 +55,7 @@ body{
     color: #040404;
     font-size: 30px;
     font-weight: 500;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 .inner img{
     height: 34px;
@@ -72,7 +72,7 @@ body{
     margin: auto;
     width: 573px;
     background-size: 100% 100%;
-    margin-top: 5px;
+    margin-top: 25px;
 }
 .rectangle h4{
     color: #fff;
@@ -126,8 +126,10 @@ body{
 .float-three{
     width: 20%;
     float: left;
+    text-align: left;
 }
 .float-three img{
+    margin-top: 7px;
     height: 50px;
 }
 .down h2{
@@ -138,11 +140,13 @@ body{
 .footer h4{
     color: #EBE3DD;
     text-align: center;
+    font-size: 24px;
+    font-weight: lighter;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 .footer{
-    background: linear-gradient(#705339,#77573C );
+    background: linear-gradient(#705339,#99714D, #99714D );
     padding-bottom: 5px;
     padding-top: 5px;
     font-size: 18px;
