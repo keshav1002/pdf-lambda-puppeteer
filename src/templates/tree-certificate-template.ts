@@ -165,7 +165,6 @@ const html: string = `
           font-size: 18px;
           font-weight: 400;
       }
-
     </style>
 </head>
 <body>
