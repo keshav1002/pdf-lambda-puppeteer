@@ -17,14 +17,12 @@ export class Helper {
       const page = await browser.newPage();
 
       if (url != null){
-        console.log('url code happnin');
         url = 'https://' + url;
         await page.goto(url);
       }
       else if (html != null){
-        console.log('html code happnin');
         const loaded = page.waitForNavigation({
-          waitUntil: "load",
+          waitUntil: "networkidle2",
         });
         await page.setContent(html);
         await loaded;
