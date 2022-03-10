@@ -48,6 +48,7 @@ export class PDFGenerator {
   static renderTreeCertificate: GeneratorFunction = async (event) => {
     try {
 
+      var partnerString, partnerLogo, treeImage;
       var data = event.body;
       var buff = new Buffer.from(data, 'base64');
       data = buff.toString('ascii');
@@ -69,8 +70,21 @@ export class PDFGenerator {
       // partner
       switch(data.partner){
         case "AMERICAN_FORESTS":
-          var partnerString = 'Planted in parthnership with American Forests';
-          var partnerLogo = 'https://cdn.floristone.com/tree-certificate/logo.png';
+          partnerString = 'Planted in parthnership with American Forests';
+          partnerLogo = 'https://cdn.floristone.com/tree-certificate/logo.png';
+          break;
+      }
+
+      // tree image
+      switch(data.treeImage){
+        case "PINE":
+          treeImage = 'https://cdn.floristone.com/tree-certificate/banner-1.png';
+          break;
+        case "PALM":
+          treeImage = 'https://cdn.floristone.com/tree-certificate/banner-2.png';
+          break;
+        case "FOREST":
+          treeImage = 'https://cdn.floristone.com/tree-certificate/banner-3.png';
           break;
       }
 
@@ -80,7 +94,8 @@ export class PDFGenerator {
         dateOfCertificate: dateOfCertificate,
         numberOfTrees: data.numberOfTrees,
         partnerString: partnerString,
-        partnerLogo: partnerLogo
+        partnerLogo: partnerLogo,
+        treeImage: treeImage
       });
 
       const options = {
@@ -91,6 +106,23 @@ export class PDFGenerator {
       };
 
       const pdf = await Helper.getPdfBuffer(null, html, options);
+
+      function formatBytes(bytes: number, decimals = 2) {
+          if (bytes === 0) return '0 Bytes'
+
+          const k = 1024
+          const dm = decimals < 0 ? 0 : decimals
+          const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+          const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+          return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
+      }
+
+      console.log('oh haiii');
+      const responseSize = Buffer.byteLength(JSON.stringify(pdf.toString("base64")), 'utf-8');
+      console.log('FINAL Response' + responseSize);
+      console.log(formatBytes(responseSize));
 
       return {
         headers: {

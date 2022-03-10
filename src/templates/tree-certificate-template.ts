@@ -21,7 +21,7 @@ const html: string = `
           margin: auto;
       }
       .banner{
-          background-image: url('https://cdn.floristone.com/tree-certificate/banner.jpg');
+          background-image: url('{{treeImage}}');
           background-repeat: no-repeat;
           background-size: 100% 100%;
           background-position: center;
