@@ -106,7 +106,7 @@ const html: string = `
           font-size: 24px;
           margin-top: 0;
           font-weight: 500;
-          margin-bottom: 25px;
+          margin-bottom: 18px;
       }
       .align{
           text-align: center;
