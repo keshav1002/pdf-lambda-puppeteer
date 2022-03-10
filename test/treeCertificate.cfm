@@ -7,7 +7,7 @@
 						Recipient
 					</td>
 					<td>
-						<input type="text" id="form-recipient-name" name="form-recipient-name" value="Brian Gomes">
+						<input type="text" id="form-recipient-name" name="form-recipient-name" value="John Doe">
 					</td>
 				</tr>
 				<tr>
@@ -35,6 +35,28 @@
 					</td>
 				</tr>
 				<tr>
+					<td>
+						Partner
+					</td>
+					<td>
+						<select id="form-partner" name="form-partner">
+							<option value="AMERICAN_FORESTS">American Forests</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Tree Image
+					</td>
+					<td>
+						<select id="form-tree-image" name="form-tree-image">
+							<option value="PINE">Pine Trees</option>
+							<option value="PALM">Palm Trees</option>
+							<option value="FOREST">Forest</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
 					<td colspan="1">
 						<input type="submit" value="Create Tree Certificate">
 					</td>
@@ -51,6 +73,8 @@
 			<cfset createCertificatePayload['senderName'] = form["form-sender-name"]>
 			<cfset createCertificatePayload['numberOfTrees'] = form["form-number-of-trees"]>
 			<cfset createCertificatePayload['dateOfCertificate'] = form["form-date-of-certificate"]>
+			<cfset createCertificatePayload['partner'] = form["form-partner"]>
+			<cfset createCertificatePayload['treeImage'] = form["form-tree-image"]>
 
 			<cfhttp url="https://y3t13lz4q1.execute-api.us-west-2.amazonaws.com/prod/treeCertificate" method="post" getAsBinary="yes">
 				<cfhttpparam type="body" value="#serializejson(createCertificatePayload)#">
