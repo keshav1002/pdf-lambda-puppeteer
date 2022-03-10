@@ -78,13 +78,13 @@ export class PDFGenerator {
       // tree image
       switch(data.treeImage){
         case "PINE":
-          treeImage = 'https://cdn.floristone.com/tree-certificate/banner-1.png';
+          treeImage = 'https://cdn.floristone.com/tree-certificate/banner_1.png';
           break;
         case "PALM":
-          treeImage = 'https://cdn.floristone.com/tree-certificate/banner-2.png';
+          treeImage = 'https://cdn.floristone.com/tree-certificate/banner_2.png';
           break;
         case "FOREST":
-          treeImage = 'https://cdn.floristone.com/tree-certificate/banner-3.png';
+          treeImage = 'https://cdn.floristone.com/tree-certificate/banner_3.png';
           break;
       }
 
