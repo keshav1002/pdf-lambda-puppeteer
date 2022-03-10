@@ -37,6 +37,7 @@ const html: string = `
           padding-top: 50px;
           padding-bottom:25px;
           width: 100%;
+          min-height: 450px;
           margin-top: -58px;
       }
       .memory h1{
@@ -98,7 +99,7 @@ const html: string = `
           font-size: 22px;
           font-weight: 400;
           margin-bottom: 2px;
-          margin-top: 10px;
+          margin-top: 20px;
       }
       .memory h6{
           color: #0F110C;
@@ -118,6 +119,7 @@ const html: string = `
       }
       .down{
           text-align: center;
+          padding-top: 10px;
       }
       .down h4{
           margin-bottom: 6px;
