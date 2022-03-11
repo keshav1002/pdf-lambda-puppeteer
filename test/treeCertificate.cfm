@@ -108,7 +108,7 @@
 			<cfset createCertificatePayload['partner'] = form["form-partner"]>
 			<cfset createCertificatePayload['treeImage'] = form["form-tree-image"]>
 
-			<cfhttp url="https://pdf.florist.one/prod/treeCertificate" method="post" getAsBinary="yes">
+			<cfhttp url="https://pdf.florist.one/prod/treeCertificate" method="post" getAsBinary="yes" charset="utf-8">
 				<cfhttpparam type="body" value="#serializejson(createCertificatePayload)#">
 			</cfhttp>
 			<cffile action="write" file="C:/inetpub/wwwroot/FHW-Solutions/TreeCertificate.pdf" output="#cfhttp.FileContent#">
