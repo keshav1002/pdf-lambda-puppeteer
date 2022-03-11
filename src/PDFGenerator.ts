@@ -51,8 +51,12 @@ export class PDFGenerator {
       var partnerString, partnerLogo, treeImage;
       var data = event.body;
       var buff = new Buffer.from(data, 'base64');
-      data = buff.toString('ascii');
+      data = buff.toString('utf8');
       data = JSON.parse(data);
+
+      console.log(data);
+      data.recipientName = data.recipientName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
+      data.senderName = data.senderName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
 
       // format date
       if (data.dateOfCertificate != null && data.dateOfCertificate.length > 0){
