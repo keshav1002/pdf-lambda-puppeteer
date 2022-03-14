@@ -177,8 +177,8 @@ const html: string = `
     <div class="memory">
      <div class="container">
          <div class="align">
-       <h1>Memorial Tree Certificate</h1>
-       <h3>In loving memory of:</h3>
+       <h1>{{title}}</h1>
+       <h3>{{recipientHeading}}:</h3>
        <div class="divider">
     </div>
     <div class="inner">
@@ -193,7 +193,7 @@ const html: string = `
       <h4>{{numberOfTrees}}</h4>
 
     </div><!--rectangle-->
-       <h5>Courtesy of:</h5>
+       <h5>{{senderHeading}}:</h5>
        <h6>{{senderName}}</h6>
        </div>
      </div><!--container-->
@@ -204,12 +204,12 @@ const html: string = `
            <h4>{{dateOfCertificate}}</h4>
            <div class="divider-two">
         </div>
-           <h4> Date</h4>
+           <h4>{{dateHeading}}</h4>
 
           </div>
 
           <div class="float-two">
-           <h2>{{partnerString}}</h2>
+           <h2>{{partnerHeading}} {{partnerName}}</h2>
           </div>
 
           <div class="float-three">
@@ -224,7 +224,7 @@ const html: string = `
 
     <div class="footer">
       <div class="container">
-        <h4>Your trees improve air and water quality, restore natural habitats, and cool earth</h4>
+        <h4>{{footer}}</h4>
       </div><!--container-->
     </div><!--footer-->
 

@@ -48,7 +48,7 @@ export class PDFGenerator {
   static renderTreeCertificate: GeneratorFunction = async (event) => {
     try {
 
-      var partnerString, partnerLogo, treeImage;
+      var partnerName, partnerLogo, treeImage;
       var data = event.body;
       var buff = new Buffer.from(data, 'base64');
       data = buff.toString('utf8');
@@ -74,7 +74,7 @@ export class PDFGenerator {
       // partner
       switch(data.partner){
         case "AMERICAN_FORESTS":
-          partnerString = 'Planted in partnership with American Forests';
+          partnerName = 'American Forests';
           partnerLogo = 'https://cdn.floristone.com/tree-certificate/logo.png';
           break;
       }
@@ -97,9 +97,15 @@ export class PDFGenerator {
         senderName: data.senderName,
         dateOfCertificate: dateOfCertificate,
         numberOfTrees: data.numberOfTrees,
-        partnerString: partnerString,
+        partnerName: partnerName,
         partnerLogo: partnerLogo,
-        treeImage: treeImage
+        treeImage: treeImage,
+        title: data.title,
+        recipientHeading: data.recipientHeading,
+        senderHeading: data.senderHeading,
+        dateHeading: data.dateHeading,
+        partnerHeading: data.partnerHeading,
+        footer: data.footer
       });
 
       const options = {
