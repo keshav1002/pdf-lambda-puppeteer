@@ -1,6 +1,6 @@
 <cftry>
 
-		<cfset recipientName = "John Doe">
+	  <cfset recipientName = "John Doe">
 		<cfif structkeyexists(form, 'form-recipient-name')>
 			<cfset recipientName = form["form-recipient-name"]>
 		</cfif>
@@ -30,23 +30,73 @@
 			<cfset treeImage = form["form-tree-image"]>
 		</cfif>
 
+		<cfset title = "Memorial Tree Certificate">
+		<cfif structkeyexists(form, 'form-title')>
+			<cfset title = form["form-title"]>
+		</cfif>
+
+		<cfset recipientHeading = "In Loving Memory of">
+		<cfif structkeyexists(form, 'form-recipient-heading')>
+			<cfset recipientHeading = form["form-recipient-heading"]>
+		</cfif>
+
+		<cfset senderHeading = "Courtesy of">
+		<cfif structkeyexists(form, 'form-sender-heading')>
+			<cfset senderHeading = form["form-sender-heading"]>
+		</cfif>
+
+		<cfset dateHeading = "Date">
+		<cfif structkeyexists(form, 'form-date-heading')>
+			<cfset dateHeading = form["form-date-heading"]>
+		</cfif>
+
+		<cfset partnerHeading = "Planted in partnership with">
+		<cfif structkeyexists(form, 'form-partner-heading')>
+			<cfset partnerHeading = form["form-partner-heading"]>
+		</cfif>
+
+		<cfset footer = "Your trees improve air and water quality, restore natural habitats, and cool earth">
+		<cfif structkeyexists(form, 'form-footer')>
+			<cfset footer = form["form-footer"]>
+		</cfif>
+
 		<cfoutput>
 			<form method="post">
 				<table border="0">
+					<tr>
+						<td>
+							Tree Image
+						</td>
+						<td>
+							<select id="form-tree-image" name="form-tree-image">
+								<option value="PINE" <cfif treeImage eq 'PINE'>selected</cfif>>Pine Trees</option>
+								<option value="PALM" <cfif treeImage eq 'PALM'>selected</cfif>>Palm Trees</option>
+								<option value="FOREST" <cfif treeImage eq 'FOREST'>selected</cfif>>Forest</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Title
+						</td>
+						<td>
+							<input type="text" id="form-title" name="form-title" value="#title#">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Recipient Heading
+						</td>
+						<td>
+							<input type="text" id="form-recipient-heading" name="form-recipient-heading" value="#recipientHeading#">
+						</td>
+					</tr>
 					<tr>
 						<td>
 							Recipient
 						</td>
 						<td>
 							<input type="text" id="form-recipient-name" name="form-recipient-name" value="#recipientName#">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Sender
-						</td>
-						<td>
-							<input type="text" id="form-sender-name" name="form-sender-name" value="#senderName#">
 						</td>
 					</tr>
 					<tr>
@@ -59,10 +109,42 @@
 					</tr>
 					<tr>
 						<td>
+							Sender Heading
+						</td>
+						<td>
+							<input type="text" id="form-sender-heading" name="form-sender-heading" value="#senderHeading#">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Sender
+						</td>
+						<td>
+							<input type="text" id="form-sender-name" name="form-sender-name" value="#senderName#">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Date Heading
+						</td>
+						<td>
+							<input type="text" id="form-date-heading" name="form-date-heading" value="#dateHeading#">
+						</td>
+					</tr>
+					<tr>
+						<td>
 							Date
 						</td>
 						<td>
 							<input type="text" id="form-date-of-certificate" name="form-date-of-certificate" value="#dateOfCertificate#">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Partner Heading
+						</td>
+						<td>
+							<input type="text" id="form-partner-heading" name="form-partner-heading" value="#partnerHeading#">
 						</td>
 					</tr>
 					<tr>
@@ -77,14 +159,10 @@
 					</tr>
 					<tr>
 						<td>
-							Tree Image
+							Footer
 						</td>
 						<td>
-							<select id="form-tree-image" name="form-tree-image">
-								<option value="PINE" <cfif treeImage eq 'PINE'>selected</cfif>>Pine Trees</option>
-								<option value="PALM" <cfif treeImage eq 'PALM'>selected</cfif>>Palm Trees</option>
-								<option value="FOREST" <cfif treeImage eq 'FOREST'>selected</cfif>>Forest</option>
-							</select>
+							<input type="text" id="form-footer" name="form-footer" value="#footer#">
 						</td>
 					</tr>
 					<tr>
@@ -107,6 +185,12 @@
 			<cfset createCertificatePayload['dateOfCertificate'] = form["form-date-of-certificate"]>
 			<cfset createCertificatePayload['partner'] = form["form-partner"]>
 			<cfset createCertificatePayload['treeImage'] = form["form-tree-image"]>
+			<cfset createCertificatePayload['title'] = form["form-title"]>
+			<cfset createCertificatePayload['recipientHeading'] = form["form-recipient-heading"]>
+			<cfset createCertificatePayload['senderHeading'] = form["form-sender-heading"]>
+			<cfset createCertificatePayload['dateHeading'] = form["form-date-heading"]>
+			<cfset createCertificatePayload['partnerHeading'] = form["form-partner-heading"]>
+			<cfset createCertificatePayload['footer'] = form["form-footer"]>
 
 			<cfhttp url="https://pdf.florist.one/prod/treeCertificate" method="post" getAsBinary="yes" charset="utf-8">
 				<cfhttpparam type="body" value="#serializejson(createCertificatePayload)#">
