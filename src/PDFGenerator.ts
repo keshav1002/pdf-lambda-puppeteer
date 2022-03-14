@@ -75,7 +75,15 @@ export class PDFGenerator {
       switch(data.partner){
         case "AMERICAN_FORESTS":
           partnerName = 'American Forests';
-          partnerLogo = 'https://cdn.floristone.com/tree-certificate/logo.png';
+          partnerLogo = 'https://cdn.floristone.com/tree-certificate/american-forests-logo.png';
+          break;
+        case "CANADIAN_INSTITUTE":
+          partnerName = 'Canadian Institute of Forestry';
+          partnerLogo = 'https://cdn.floristone.com/tree-certificate/canadian-institute-of-forestry.png';
+          break;
+        case "ONE_TREE_PLANTED":
+          partnerName = 'One Tree Planted';
+          partnerLogo = 'https://cdn.floristone.com/tree-certificate/one-tree-planted-logo.png';
           break;
       }
 

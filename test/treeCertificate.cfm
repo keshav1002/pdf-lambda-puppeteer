@@ -154,6 +154,8 @@
 						<td>
 							<select id="form-partner" name="form-partner">
 								<option value="AMERICAN_FORESTS" <cfif partner eq 'AMERICAN_FORESTS'>selected</cfif>>American Forests</option>
+								<option value="CANADIAN_INSTITUTE" <cfif partner eq 'CANADIAN_INSTITUTE'>selected</cfif>>Canadian Institute of Forestry</option>
+								<option value="ONE_TREE_PLANTED" <cfif partner eq 'ONE_TREE_PLANTED'>selected</cfif>>One Tree Planted</option>
 							</select>
 						</td>
 					</tr>
