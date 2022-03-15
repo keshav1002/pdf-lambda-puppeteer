@@ -79,7 +79,7 @@ export class PDFGenerator {
           break;
         case "CANADIAN_INSTITUTE":
           partnerName = 'Canadian Institute of Forestry';
-          partnerLogo = 'https://cdn.floristone.com/tree-certificate/canadian-institute-of-forestry.png';
+          partnerLogo = 'https://cdn.floristone.com/tree-certificate/canadian-institute.png';
           break;
         case "ONE_TREE_PLANTED":
           partnerName = 'One Tree Planted';

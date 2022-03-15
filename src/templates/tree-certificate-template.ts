@@ -140,10 +140,15 @@ const html: string = `
           width: 20%;
           float: left;
           text-align: left;
-      }
-      .float-three img{
-          margin-top: 7px;
           height: 50px;
+          max-height: 50px;
+      }
+      .float-three img {
+          margin-top: 7px;
+          max-height: 100%;
+          height: auto;
+          max-width: 80%;
+          width: auto;
       }
       .down h2{
           font-size: 20px;
