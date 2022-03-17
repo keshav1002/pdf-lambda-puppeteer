@@ -40,3 +40,12 @@ functions:
       - http:
           method: post
           path: /treeCertificate
+          cors: true
+  renderTreeCertificate:
+    handler: handler.renderTreeCertificate
+    memorySize: 1024 # Setting a higher RAM size to facilitate PDF generation
+    events:
+      - http:
+          method: options
+          path: /treeCertificate
+          cors: true
