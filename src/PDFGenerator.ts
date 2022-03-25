@@ -53,18 +53,31 @@ export class PDFGenerator {
       console.log(event.body);
 
       var partnerName, partnerLogo, treeImage;
-      var data = event.body;
-      var buff = new Buffer.from(data, 'base64');
-      data = buff.toString('utf8');
 
-      try {
+      // GET
+      // Standard JSON payload in base64 and stored url._p
+      if (!event.body){
+        console.log(event.queryStringParameters);
+        var data = event.queryStringParameters._p;
+        var buff = new Buffer.from(data, 'base64');
+        data = buff.toString('utf8');
         data = JSON.parse(data);
-        console.log('IS OBJ');
-      } catch (e) {
-        console.log('NOT OBJ');
-        console.log(data);
-        data = qs.parse(data);
-        console.log(data);
+      }
+
+      // POST
+      else {
+        var data = event.body;
+        var buff = new Buffer.from(data, 'base64');
+        data = buff.toString('utf8');
+        try {
+          data = JSON.parse(data);
+          console.log('IS OBJ');
+        } catch (e) {
+          console.log('NOT OBJ');
+          console.log(data);
+          data = qs.parse(data);
+          console.log(data);
+        }
       }
 
       console.log(data);
