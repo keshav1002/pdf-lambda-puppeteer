@@ -1,6 +1,7 @@
 import { Helper } from "./Helper";
 import { GeneratorFunction } from "./types/GeneratorTypes";
 import { getTreeCertificateTemplate } from "./templates/tree-certificate-template";
+var qs = require('querystring');
 
 export class PDFGenerator {
   /**
@@ -48,11 +49,23 @@ export class PDFGenerator {
   static renderTreeCertificate: GeneratorFunction = async (event) => {
     try {
 
+      console.log(event);
+      console.log(event.body);
+
       var partnerName, partnerLogo, treeImage;
       var data = event.body;
       var buff = new Buffer.from(data, 'base64');
       data = buff.toString('utf8');
-      data = JSON.parse(data);
+
+      try {
+        data = JSON.parse(data);
+        console.log('IS OBJ');
+      } catch (e) {
+        console.log('NOT OBJ');
+        console.log(data);
+        data = qs.parse(data);
+        console.log(data);
+      }
 
       console.log(data);
       data.recipientName = data.recipientName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
@@ -137,7 +150,6 @@ export class PDFGenerator {
           return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
       }
 
-      console.log('oh haiii');
       const responseSize = Buffer.byteLength(JSON.stringify(pdf.toString("base64")), 'utf-8');
       console.log('FINAL Response' + responseSize);
       console.log(formatBytes(responseSize));
