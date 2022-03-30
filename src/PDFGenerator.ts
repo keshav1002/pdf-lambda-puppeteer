@@ -121,7 +121,7 @@ export class PDFGenerator {
         case "PALM":
           treeImage = 'https://cdn.floristone.com/tree-certificate/banner_2.png';
           break;
-        case "FOREST":
+        case "WOODLAND":
           treeImage = 'https://cdn.floristone.com/tree-certificate/banner_3.png';
           break;
       }
