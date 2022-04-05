@@ -3,6 +3,15 @@ import { GeneratorFunction } from "./types/GeneratorTypes";
 import { getTreeCertificateTemplate } from "./templates/tree-certificate-template";
 var qs = require('querystring');
 
+var AWS = require("aws-sdk");
+AWS.config.update({
+  accessKeyId: "AKIAJBM7C3PNAOLZSHBA",
+  secretAccessKey: "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",
+  region: "us-west-2"
+});
+var s3 = new aws.S3();
+var bucket = "floristone-product-images";
+
 export class PDFGenerator {
   /**
    * This function returns the buffer for a generated PDF of manual
@@ -167,15 +176,41 @@ export class PDFGenerator {
       console.log('FINAL Response' + responseSize);
       console.log(formatBytes(responseSize));
 
-      return {
-        headers: {
-          "Content-type": "application/pdf"
-          // , "Content-Disposition": "attachment; filename=restfile.pdf"
-        },
-        statusCode: 200,
-        body: pdf.toString("base64"),
-        isBase64Encoded: true,
-      };
+      if ("_p" in event.queryStringParameters){
+        s3.putObject({
+            Bucket: bucket,
+            Key: event.queryStringParameters._p,
+            ContentType: 'application/pdf',
+            ContentLength: reqres.headers['content-length'],
+            Body: body
+          }, function(err, data) {
+
+            if (err) {
+              console.log(err);
+              result.message = JSON.stringify(err);
+            } else {
+              console.log(data);
+              result.url = cdnUrl + "/" + imageUrl;
+              result.message = JSON.stringify(data);
+            }
+
+            console.log(result);
+            res.json(result);
+
+          });
+      }
+      else {
+        return {
+          headers: {
+            "Content-type": "application/pdf"
+            // , "Content-Disposition": "attachment; filename=restfile.pdf"
+          },
+          statusCode: 200,
+          body: pdf.toString("base64"),
+          isBase64Encoded: true,
+        };
+      }
+
     } catch (error) {
       console.error("Error : ", error);
       return {
