@@ -3,11 +3,12 @@ import { GeneratorFunction } from "./types/GeneratorTypes";
 import { getTreeCertificateTemplate } from "./templates/tree-certificate-template";
 var qs = require('querystring');
 
+var config = require('../config.json');
 var AWS = require("aws-sdk");
 AWS.config.update({
-  accessKeyId: "AKIAJBM7C3PNAOLZSHBA",
-  secretAccessKey: "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",
-  region: "us-west-2"
+  accessKeyId: config.aws.accessKeyId,
+  secretAccessKey: config.aws.secretAccessKey,
+  region: config.aws.region
 });
 var s3 = new aws.S3();
 var bucket = "floristone-product-images";
