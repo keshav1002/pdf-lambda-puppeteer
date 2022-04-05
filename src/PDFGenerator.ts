@@ -90,6 +90,27 @@ export class PDFGenerator {
         }
       }
 
+      // todo
+      if ("_x" in event.queryStringParameters){
+        var params = { Bucket: bucket, Key: "/tree-certificate/pdf/" + event.queryStringParameters._p };
+        s3.getObject(params, function(err, data) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(data);
+            return {
+              headers: {
+                "Content-type": "application/pdf"
+              },
+              statusCode: 200,
+              body: data.Body,
+              isBase64Encoded: true,
+            };
+          }
+        });
+
+      }
+
       console.log(data);
       data.recipientName = data.recipientName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
       data.senderName = data.senderName.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '');
@@ -179,31 +200,29 @@ export class PDFGenerator {
 
 
       if ("_x" in event.queryStringParameters){
-        // try {
-          s3.putObject({
-              Bucket: bucket,
-              Key: "tree-certificate/pdf/" + event.queryStringParameters._p,
-              ContentType: 'application/pdf',
-              ContentLength: responseSize,
-              Body: pdf.toString("base64")
-            }, function(err, data) {
-
-              if (err) {
-                console.log(err);
-                // result.message = JSON.stringify(err);
-              } else {
-                console.log(data);
-                // result.url = cdnUrl + "/" + imageUrl;
-                // result.message = JSON.stringify(data);
-              }
-
-              // console.log(result);
-              // res.json(result);
-
-            });
-          // } catch(e){
-          //   console.log('fuck');
-          // };
+        console.log('start s3 shit');
+        s3.putObject({
+          Bucket: bucket,
+          Key: "/tree-certificate/pdf/" + event.queryStringParameters._p,
+          ContentType: 'application/pdf',
+          Body: pdf.toString("base64")
+        }, function(err, data) {
+          console.log('s3 shit done');
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(data);
+            return {
+              headers: {
+                "Content-type": "application/pdf"
+              },
+              statusCode: 200,
+              body: pdf.toString("base64"),
+              isBase64Encoded: true,
+            };
+          }
+        });
+        console.log('after s3 shit');
       }
 
       else {
