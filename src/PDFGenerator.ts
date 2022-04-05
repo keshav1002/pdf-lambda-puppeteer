@@ -178,11 +178,11 @@ export class PDFGenerator {
       console.log(formatBytes(responseSize));
 
 
-      if ("_p" in event.queryStringParameters){
-        try {
+      if ("_x" in event.queryStringParameters){
+        // try {
           s3.putObject({
               Bucket: bucket,
-              Key: event.queryStringParameters._p,
+              Key: "tree-certificate/pdf/" + event.queryStringParameters._p,
               ContentType: 'application/pdf',
               ContentLength: responseSize,
               Body: pdf.toString("base64")
@@ -201,12 +201,12 @@ export class PDFGenerator {
               // res.json(result);
 
             });
-          } catch(e){
-            console.log('fuck');
-          };
+          // } catch(e){
+          //   console.log('fuck');
+          // };
       }
 
-      // else {
+      else {
         return {
           headers: {
             "Content-type": "application/pdf"
@@ -216,7 +216,7 @@ export class PDFGenerator {
           body: pdf.toString("base64"),
           isBase64Encoded: true,
         };
-      // }
+      }
 
     } catch (error) {
       console.error("Error : ", error);
