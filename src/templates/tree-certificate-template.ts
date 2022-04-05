@@ -31,7 +31,7 @@ const html: string = `
           z-index: 999;
       }
       .memory{
-          background-image: url('https://cdn.floristone.com/tree-certificate/linen.png');
+          background-image: url('https://cdn.floristone.com/tree-certificate/linen.jpg');
           background-repeat:repeat;
           background-position: center;
           padding-top: 50px;
