@@ -4,8 +4,8 @@ import { getTreeCertificateTemplate } from "./templates/tree-certificate-templat
 var qs = require('querystring');
 
 var config = require('../config.json');
-var AWS = require("aws-sdk");
-AWS.config.update({
+var aws = require("aws-sdk");
+aws.config.update({
   accessKeyId: config.aws.accessKeyId,
   secretAccessKey: config.aws.secretAccessKey,
   region: config.aws.region
@@ -177,30 +177,36 @@ export class PDFGenerator {
       console.log('FINAL Response' + responseSize);
       console.log(formatBytes(responseSize));
 
+
       if ("_p" in event.queryStringParameters){
-        s3.putObject({
-            Bucket: bucket,
-            Key: event.queryStringParameters._p,
-            ContentType: 'application/pdf',
-            ContentLength: reqres.headers['content-length'],
-            Body: body
-          }, function(err, data) {
+        try {
+          s3.putObject({
+              Bucket: bucket,
+              Key: event.queryStringParameters._p,
+              ContentType: 'application/pdf',
+              ContentLength: responseSize,
+              Body: pdf.toString("base64")
+            }, function(err, data) {
 
-            if (err) {
-              console.log(err);
-              result.message = JSON.stringify(err);
-            } else {
-              console.log(data);
-              result.url = cdnUrl + "/" + imageUrl;
-              result.message = JSON.stringify(data);
-            }
+              if (err) {
+                console.log(err);
+                // result.message = JSON.stringify(err);
+              } else {
+                console.log(data);
+                // result.url = cdnUrl + "/" + imageUrl;
+                // result.message = JSON.stringify(data);
+              }
 
-            console.log(result);
-            res.json(result);
+              // console.log(result);
+              // res.json(result);
 
-          });
+            });
+          } catch(e){
+            console.log('fuck');
+          };
       }
-      else {
+
+      // else {
         return {
           headers: {
             "Content-type": "application/pdf"
@@ -210,7 +216,7 @@ export class PDFGenerator {
           body: pdf.toString("base64"),
           isBase64Encoded: true,
         };
-      }
+      // }
 
     } catch (error) {
       console.error("Error : ", error);
