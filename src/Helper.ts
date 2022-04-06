@@ -49,7 +49,10 @@ export class Helper {
   };
 
   static checkExistsInS3 = async (d) => {
-    var params = { Bucket: bucket, Key: "tree-certificate/pdf/" + d + ".pdf" };
+    var params = {
+      Bucket: bucket,
+      Key: "tree-certificate/pdf/" + d + ".pdf"
+    };
     console.log(params);
     try {
       const data = await s3.getObject(params).promise();
@@ -59,17 +62,19 @@ export class Helper {
     }
   }
 
-  static uploadToS3 = async (d) => {
-    console.log("UPLAODING TO S3 MOTHERFUCKER");
-    return;
-    // var params = { Bucket: bucket, Key: "tree-certificate/pdf/" + d + ".pdf" };
-    // console.log(params);
-    // try {
-    //   const data = await s3.getObject(params).promise();
-    //   return data;
-    // } catch(e) {
-    //   return e;
-    // }
+  static uploadToS3 = async (n, d) => {
+    var params = {
+      Bucket: bucket,
+      Key: "tree-certificate/pdf/" + n + ".pdf",
+      ContentType: 'application/pdf',
+      Body: d
+    };
+    try {
+      const data = await s3.putObject(params).promise();
+      return data;
+    } catch(e) {
+      return e;
+    }
   }
 
 }

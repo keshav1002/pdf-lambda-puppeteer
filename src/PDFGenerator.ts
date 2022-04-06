@@ -179,9 +179,7 @@ export class PDFGenerator {
       const pdf = await Helper.getPdfBuffer(null, html, options);
 
       if ("_p" in event.queryStringParameters){
-        console.log('store');
-        const storePdf = await Helper.uploadToS3(event.queryStringParameters._p, pdf.toString("base64"));
-        console.log('stored?');
+        const storePdf = await Helper.uploadToS3(event.queryStringParameters._p, pdf);
       }
 
       return {
