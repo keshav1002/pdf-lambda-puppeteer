@@ -66,7 +66,7 @@ export class PDFGenerator {
 
       // check if pdf already exists in s3
       // only works for GET type for time being
-      if ("_p" in event.queryStringParameters){
+      if (event.queryStringParameters !== null){
         const pdf = await Helper.checkExistsInS3(event.queryStringParameters._p);
         // exists, return pdf directly
         if ("ContentLength" in pdf && pdf.ContentLength > 0){
@@ -178,7 +178,7 @@ export class PDFGenerator {
 
       const pdf = await Helper.getPdfBuffer(null, html, options);
 
-      if ("_p" in event.queryStringParameters){
+      if (event.queryStringParameters !== null){
         const storePdf = await Helper.uploadToS3(event.queryStringParameters._p, pdf);
       }
 
