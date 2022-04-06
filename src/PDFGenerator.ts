@@ -71,10 +71,10 @@ export class PDFGenerator {
         var data = event.queryStringParameters._p;
 
         // check if pdf already exists in s3
-        const balls = await Helper.checkExistsInS3(data);
+        const pdf = await Helper.checkExistsInS3(data);
 
         // doesn't exist
-        if (balls.statusCode == 404){
+        if (pdf.statusCode == 404){
           var buff = new Buffer.from(data, 'base64');
           data = buff.toString('utf8');
           data = JSON.parse(data);
@@ -87,7 +87,7 @@ export class PDFGenerator {
               "Content-type": "application/pdf"
             },
             statusCode: 200,
-            body: balls.Body.toString('base64'),
+            body: pdf.Body.toString('base64'),
             isBase64Encoded: true,
           };
         }

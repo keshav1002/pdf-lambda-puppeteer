@@ -48,7 +48,6 @@ export class Helper {
     }
   };
 
-
   static checkExistsInS3 = async (d) => {
     var params = { Bucket: bucket, Key: "tree-certificate/pdf/" + d + ".pdf" };
     console.log(params);
