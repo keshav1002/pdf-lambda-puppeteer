@@ -69,9 +69,29 @@ export class PDFGenerator {
       if (!event.body){
         console.log(event.queryStringParameters);
         var data = event.queryStringParameters._p;
-        var buff = new Buffer.from(data, 'base64');
-        data = buff.toString('utf8');
-        data = JSON.parse(data);
+
+        // check if pdf already exists in s3
+        const balls = await Helper.checkExistsInS3(data);
+
+        // doesn't exist
+        if (balls.statusCode == 404){
+          var buff = new Buffer.from(data, 'base64');
+          data = buff.toString('utf8');
+          data = JSON.parse(data);
+        }
+
+        // does exist, return pdf from s3
+        else{
+          return {
+            headers: {
+              "Content-type": "application/pdf"
+            },
+            statusCode: 200,
+            body: balls.Body.toString('base64'),
+            isBase64Encoded: true,
+          };
+        }
+
       }
 
       // POST
