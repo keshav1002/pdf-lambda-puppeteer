@@ -64,24 +64,12 @@ export class PDFGenerator {
 
       var partnerName, partnerLogo, treeImage;
 
-      // GET
-      // Standard JSON payload in base64 and stored url._p
-      if (!event.body){
-        console.log(event.queryStringParameters);
-        var data = event.queryStringParameters._p;
-
-        // check if pdf already exists in s3
-        const pdf = await Helper.checkExistsInS3(data);
-
-        // doesn't exist
-        if (pdf.statusCode == 404){
-          var buff = new Buffer.from(data, 'base64');
-          data = buff.toString('utf8');
-          data = JSON.parse(data);
-        }
-
-        // does exist, return pdf from s3
-        else{
+      // check if pdf already exists in s3
+      // only works for GET type for time being
+      if ("_p" in event.queryStringParameters){
+        const pdf = await Helper.checkExistsInS3(event.queryStringParameters._p);
+        // exists, return pdf directly
+        if ("ContentLength" in pdf && pdf.ContentLength > 0){
           return {
             headers: {
               "Content-type": "application/pdf"
@@ -91,7 +79,16 @@ export class PDFGenerator {
             isBase64Encoded: true,
           };
         }
+      }
 
+      // GET
+      // Standard JSON payload in base64 and stored url._p
+      if (!event.body){
+        console.log(event.queryStringParameters);
+        var data = event.queryStringParameters._p;
+        var buff = new Buffer.from(data, 'base64');
+        data = buff.toString('utf8');
+        data = JSON.parse(data);
       }
 
       // POST
@@ -108,27 +105,6 @@ export class PDFGenerator {
           data = qs.parse(data);
           console.log(data);
         }
-      }
-
-      // todo
-      if ("_x" in event.queryStringParameters){
-        var params = { Bucket: bucket, Key: "/tree-certificate/pdf/" + event.queryStringParameters._p };
-        s3.getObject(params, function(err, data) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(data);
-            return {
-              headers: {
-                "Content-type": "application/pdf"
-              },
-              statusCode: 200,
-              body: data.Body,
-              isBase64Encoded: true,
-            };
-          }
-        });
-
       }
 
       console.log(data);
@@ -202,60 +178,20 @@ export class PDFGenerator {
 
       const pdf = await Helper.getPdfBuffer(null, html, options);
 
-      function formatBytes(bytes: number, decimals = 2) {
-          if (bytes === 0) return '0 Bytes'
-
-          const k = 1024
-          const dm = decimals < 0 ? 0 : decimals
-          const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-
-          const i = Math.floor(Math.log(bytes) / Math.log(k))
-
-          return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
+      if ("_p" in event.queryStringParameters){
+        console.log('store');
+        const storePdf = await Helper.uploadToS3(event.queryStringParameters._p, pdf.toString("base64"));
+        console.log('stored?');
       }
 
-      const responseSize = Buffer.byteLength(JSON.stringify(pdf.toString("base64")), 'utf-8');
-      console.log('FINAL Response' + responseSize);
-      console.log(formatBytes(responseSize));
-
-
-      if ("_x" in event.queryStringParameters){
-        console.log('start s3 shit');
-        s3.putObject({
-          Bucket: bucket,
-          Key: "/tree-certificate/pdf/" + event.queryStringParameters._p,
-          ContentType: 'application/pdf',
-          Body: pdf.toString("base64")
-        }, function(err, data) {
-          console.log('s3 shit done');
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(data);
-            return {
-              headers: {
-                "Content-type": "application/pdf"
-              },
-              statusCode: 200,
-              body: pdf.toString("base64"),
-              isBase64Encoded: true,
-            };
-          }
-        });
-        console.log('after s3 shit');
-      }
-
-      else {
-        return {
-          headers: {
-            "Content-type": "application/pdf"
-            // , "Content-Disposition": "attachment; filename=restfile.pdf"
-          },
-          statusCode: 200,
-          body: pdf.toString("base64"),
-          isBase64Encoded: true,
-        };
-      }
+      return {
+        headers: {
+          "Content-type": "application/pdf"
+        },
+        statusCode: 200,
+        body: pdf.toString("base64"),
+        isBase64Encoded: true,
+      };
 
     } catch (error) {
       console.error("Error : ", error);

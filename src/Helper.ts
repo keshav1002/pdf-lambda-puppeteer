@@ -59,5 +59,17 @@ export class Helper {
     }
   }
 
+  static uploadToS3 = async (d) => {
+    console.log("UPLAODING TO S3 MOTHERFUCKER");
+    return;
+    // var params = { Bucket: bucket, Key: "tree-certificate/pdf/" + d + ".pdf" };
+    // console.log(params);
+    // try {
+    //   const data = await s3.getObject(params).promise();
+    //   return data;
+    // } catch(e) {
+    //   return e;
+    // }
+  }
 
 }
